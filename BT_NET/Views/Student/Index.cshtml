@@ -1,0 +1,15 @@
+@model BT_NET.Models.Student
+
+<form asp-action="Index" asp-controller="Student" method="POST">
+    <h3>Hello @ViewBag.ThongBao</h3>
+    <label>Full name: </label>
+        <label>Full name: </label>
+        <input type="text" name="Fullname">
+        <br>
+
+        <label>Student Code: </label>
+        <input type="text" name="StudentCode">
+        <br>
+
+        <button type="submit">Gửi</button>
+</form>

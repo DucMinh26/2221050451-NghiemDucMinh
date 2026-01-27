@@ -1,0 +1,24 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+
+    <form asp-action="Index" asp-controller="Demo" method="post">
+        <label>Full name: </label>
+        <input type="text" name="Fullname">
+        <br>
+
+        <label>Student ID: </label>
+        <input type="number" name="msv">
+        <br>
+
+        <button type="submit">Gửi</button>
+    </form>
+
+    @if (ViewBag.name != null)
+    {
+        <h3>Hello @ViewBag.name - @ViewBag.id</h3>
+    }
+
+</div>
