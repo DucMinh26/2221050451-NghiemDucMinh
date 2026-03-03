@@ -1,7 +1,12 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace BT_NET.Models
 {
     public class Student{
-        public string Fullname{get; set;}
-        public string StudentCode{get; set;}
+        [Key]
+        public string StudentCode{get; set;} = default!;
+        public string? Fullname{get; set;} 
+        public int? Age { get; set; }
+    
     }
 }

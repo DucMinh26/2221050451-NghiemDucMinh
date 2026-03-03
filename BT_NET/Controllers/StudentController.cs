@@ -13,7 +13,7 @@ namespace BT_NET.Controllers{
         [HttpPost]
         public IActionResult Index(String Fullname, String StudentCode)
         {
-            ViewBag.ThongBao = "Fullname: " + Fullname + ", StudentCode: " + StudentCode;
+            ViewBag.ThongBao = "HELLO " + Fullname + " - " + StudentCode;
             return View();
         }
     }
