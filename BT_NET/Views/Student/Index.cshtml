@@ -1,15 +1,24 @@
-@model BT_NET.Models.Student
-
-<form asp-action="Index" asp-controller="Student" method="POST">
-    <h3>Hello @ViewBag.ThongBao</h3>
-    <label>Full name: </label>
-        <label>Full name: </label>
-        <input type="text" name="Fullname">
-        <br>
-
-        <label>Student Code: </label>
-        <input type="text" name="StudentCode">
-        <br>
-
-        <button type="submit">Gửi</button>
-</form>
+@model IEnumerable<BT_NET.Models.Student>
+<h2>Danh sách sinh viên</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Mã sinh viên</th>
+            <th>Họ và tên</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model)
+        {
+            <tr>
+                <td>@student.StudentCode</td>
+                <td>@student.FullName</td>
+                <td>
+                    <a asp-action="Edit" asp-all-route-id="@student.StudentCode">Edit</a>
+                    <a asp-action="Delete" asp-all-route-id="@student.StudentCode">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

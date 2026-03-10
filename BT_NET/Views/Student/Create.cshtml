@@ -1,0 +1,18 @@
+@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@model BT_NET.Models.Student
+
+@{ ViewData["Title"] = "Index"; }
+<h2>Thêm mới sinh viên</h2>
+
+<form asp-action="Create" asp-controller="Student" method="POST">
+    <div>
+        <label>Mã sinh viên:</label>
+        <input asp-for="StudentCode" class="form-control" />
+    </div>
+    <div>
+        <label>Họ và tên:</label>
+        <input asp-for="FullName" class="form-control" />
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>

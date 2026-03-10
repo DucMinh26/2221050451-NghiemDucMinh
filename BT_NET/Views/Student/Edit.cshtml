@@ -1,0 +1,18 @@
+@model BT_NET.Models.Student
+
+<h2>Form sử dữ liệu</h2>
+
+<form asp-action="Edit" method="post">
+    <div class="form-group">
+        <label for="">Mã sinh viên</label>
+        <input type="text" class="form-control" name="StudentCode" placeholder="Nhập mã sinh viên"
+               value="@Model.StudentCode">
+    </div>
+    <div class="form-group">
+        <label for="">Tên sinh viên</label>
+        <input type="text" class="form-control" name="FullName" placeholder="Tên sinh viên" value="@Model.FullName">
+    </div>
+    <div class="form-group">
+        <input type="submit" class="form-control" value="Update Student">
+    </div>
+</form>
