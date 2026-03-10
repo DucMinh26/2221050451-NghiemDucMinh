@@ -27,6 +27,15 @@ namespace BT_NET.Controllers
         [HttpPost]
         public IActionResult Create(Student std)
         {
+            // 1. Kiểm tra xem mã này đã có trong DB chưa
+            var existingStudent = _context.Students.Find(std.StudentCode);
+
+            if (existingStudent != null)
+            {
+                // Nếu đã tồn tại, báo lỗi ra màn hình (hoặc trả về View kèm thông báo)
+                ModelState.AddModelError("", "Mã sinh viên này đã tồn tại rồi!");
+                return View(std);
+            }
             _context.Students.Add(std);
             _context.SaveChanges();
             return RedirectToAction("Index");
@@ -46,6 +55,19 @@ namespace BT_NET.Controllers
         {
             _context.Students.Update(std);
             _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Delete(string id)
+        {
+            var student = _context.Students.Find(id);
+
+            if (student != null)
+            {
+                _context.Students.Remove(student);
+                _context.SaveChanges();
+            }
+
             return RedirectToAction("Index");
         }
     }

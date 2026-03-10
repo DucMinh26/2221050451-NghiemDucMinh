@@ -1,9 +1,13 @@
 @using Microsoft.EntityFrameworkCore.Metadata.Internal
 @model BT_NET.Models.Student
 
-@{ ViewData["Title"] = "Index"; }
-<h2>Thêm mới sinh viên</h2>
+@{
+    ViewData["Title"] = "Index";
+}
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
+<h2>Thêm mới sinh viên</h2>
+<a href="/Student/Index">Danh sách sinh viên</a>
 <form asp-action="Create" asp-controller="Student" method="POST">
     <div>
         <label>Mã sinh viên:</label>
