@@ -7,10 +7,22 @@
         <label for="">Mã sinh viên</label>
         <input type="text" class="form-control" name="StudentCode" placeholder="Nhập mã sinh viên"
                value="@Model.StudentCode" readonly>
+               <span asp-validation-for="StudentCode" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label for="">Tên sinh viên</label>
         <input type="text" class="form-control" name="FullName" placeholder="Tên sinh viên" value="@Model.FullName">
+        <span asp-validation-for="FullName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="">Tuổi</label>
+        <input type="text" class="form-control" name="Age" placeholder="Tuổi" value="@Model.Age">
+        <span asp-validation-for="Age" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="">Email</label>
+        <input type="text" class="form-control" name="Email" placeholder="Email" value="@Model.Email">
+        <span asp-validation-for="Email" class="text-danger"></span>
     </div>
     <div class="form-group">
         <input type="submit" class="form-control" value="Update Student">

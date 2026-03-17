@@ -1,6 +1,7 @@
 using BT_NET.Data;
 using BT_NET.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace BT_NET.Controllers
 {
@@ -36,9 +37,14 @@ namespace BT_NET.Controllers
                 ModelState.AddModelError("", "Mã sinh viên này đã tồn tại rồi!");
                 return View(std);
             }
-            _context.Students.Add(std);
-            _context.SaveChanges();
-            return RedirectToAction("Index");
+            //kiểm tra dữ liệu hợp lệ mới lưu
+            if (ModelState.IsValid)
+            {
+                _context.Students.Add(std);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(std);
         }
 
         //1. Hiển thị form với dữ liệu cũ
@@ -53,9 +59,13 @@ namespace BT_NET.Controllers
         [HttpPost]
         public IActionResult Edit(Student std)
         {
-            _context.Students.Update(std);
-            _context.SaveChanges();
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                _context.Students.Update(std);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(std);
         }
 
         public IActionResult Delete(string id)
