@@ -26,6 +26,7 @@ namespace BT_NET.Controllers
 
         //2. Nhận dữ liệu từ form và lưu vào SQlite
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(Student std)
         {
             // 1. Kiểm tra xem mã này đã có trong DB chưa
@@ -34,7 +35,7 @@ namespace BT_NET.Controllers
             if (existingStudent != null)
             {
                 // Nếu đã tồn tại, báo lỗi ra màn hình (hoặc trả về View kèm thông báo)
-                ModelState.AddModelError("", "Mã sinh viên này đã tồn tại rồi!");
+                ModelState.AddModelError("StudentCode", "Mã sinh viên này đã tồn tại rồi!");
                 return View(std);
             }
             //kiểm tra dữ liệu hợp lệ mới lưu

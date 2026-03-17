@@ -12,5 +12,6 @@ namespace BT_NET.Data
         public DbSet<Student> Students { get; set; }
         // public DbSet<Product> Products { get; set; }
         // Ví dụ: public DbSet<Student> Students { get; set; }
+        public DbSet<StudentNew> StudentNews { get; set; }
     }
 }

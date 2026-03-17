@@ -28,6 +28,10 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
+// Thêm dòng này vào ngay sau builder.Build()
+app.UseStatusCodePagesWithReExecute("/Home/Error/{0}");//Trang thông báo not found 
+
 app.UseHttpsRedirection();
 app.UseRouting();
 
