@@ -1,4 +1,5 @@
 using BT_NET.Models;
+using BT_NET.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 namespace BT_NET.Data 
 {
@@ -9,9 +10,7 @@ namespace BT_NET.Data
         {
         }
 
+        public DbSet<Faculty> Faculties { get; set; }
         public DbSet<Student> Students { get; set; }
-        // public DbSet<Product> Products { get; set; }
-        // Ví dụ: public DbSet<Student> Students { get; set; }
-        public DbSet<StudentNew> StudentNews { get; set; }
     }
 }

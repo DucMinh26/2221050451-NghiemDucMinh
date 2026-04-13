@@ -1,27 +1,40 @@
-@model IEnumerable<BT_NET.Models.Student>
-<h2>Danh sách sinh viên</h2>
-<a href="/Student/Create">Thêm sinh viên</a>
+@model IEnumerable<BT_NET.Models.ViewModels.StudentVM>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
 <table class="table">
     <thead>
         <tr>
-            <th>Mã sinh viên</th>
-            <th>Họ và tên</th>
-            <th>Tuổi</th>
-            <th>Email</th>
-            <th>Actions</th>
+            <th>
+                @Html.DisplayNameFor(model => model.StudentName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FacultyName)
+            </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var student in Model)
+        @foreach (var item in Model)
         {
             <tr>
-                <td>@student.StudentCode</td>
-                <td>@student.FullName</td>
-                <td>@student.Age</td>
-                <td>@student.Email</td>
                 <td>
-                    <a asp-action="Edit" asp-controller="Student" asp-route-id="@student.StudentCode">Edit</a>
-                    <a asp-action="Delete" asp-controller="Student" asp-route-id="@student.StudentCode">Delete</a>
+                    @Html.DisplayFor(modelItem => item.StudentName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FacultyName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.StudentId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.StudentId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.StudentId">Delete</a>
                 </td>
             </tr>
         }

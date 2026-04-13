@@ -1,30 +1,39 @@
-@model BT_NET.Models.Student
+@model BT_NET.Models.Entities.Student
 
-<h2>Form sử dữ liệu</h2>
-<a href="/Student/Index">Danh sách sinh viên</a>
-<form asp-action="Edit" method="post">
-    <div class="form-group">
-        <label for="">Mã sinh viên</label>
-        <input type="text" class="form-control" name="StudentCode" placeholder="Nhập mã sinh viên"
-               value="@Model.StudentCode" readonly>
-               <span asp-validation-for="StudentCode" class="text-danger"></span>
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Student</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="StudentId" />
+            <div class="form-group">
+                <label asp-for="StudentName" class="control-label"></label>
+                <input asp-for="StudentName" class="form-control" />
+                <span asp-validation-for="StudentName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FacultyId" class="control-label"></label>
+                <select asp-for="FacultyId" class="form-control" asp-items="ViewBag.FacultyId"></select>
+                <span asp-validation-for="FacultyId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
-    <div class="form-group">
-        <label for="">Tên sinh viên</label>
-        <input type="text" class="form-control" name="FullName" placeholder="Tên sinh viên" value="@Model.FullName">
-        <span asp-validation-for="FullName" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label for="">Tuổi</label>
-        <input type="text" class="form-control" name="Age" placeholder="Tuổi" value="@Model.Age">
-        <span asp-validation-for="Age" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label for="">Email</label>
-        <input type="text" class="form-control" name="Email" placeholder="Email" value="@Model.Email">
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <input type="submit" class="form-control" value="Update Student">
-    </div>
-</form>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BT_NET.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260317024213_CreateStudentNewTable")]
-    partial class CreateStudentNewTable
+    [Migration("20260413135659_CreateStudentAndFaculty")]
+    partial class CreateStudentAndFaculty
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -19,24 +19,36 @@ namespace BT_NET.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.3");
 
-            modelBuilder.Entity("BT_NET.Models.Student", b =>
+            modelBuilder.Entity("BT_NET.Models.Entities.Faculty", b =>
                 {
-                    b.Property<string>("StudentCode")
-                        .HasMaxLength(10)
+                    b.Property<string>("FacultyId")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Age")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("FullName")
+                    b.Property<string>("FacultyName")
                         .IsRequired()
-                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
-                    b.HasKey("StudentCode");
+                    b.HasKey("FacultyId");
+
+                    b.ToTable("Faculties");
+                });
+
+            modelBuilder.Entity("BT_NET.Models.Entities.Student", b =>
+                {
+                    b.Property<string>("StudentId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FacultyId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("StudentName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("StudentId");
+
+                    b.HasIndex("FacultyId");
 
                     b.ToTable("Students");
                 });
@@ -61,6 +73,22 @@ namespace BT_NET.Migrations
                     b.HasKey("StudentCode");
 
                     b.ToTable("StudentNews");
+                });
+
+            modelBuilder.Entity("BT_NET.Models.Entities.Student", b =>
+                {
+                    b.HasOne("BT_NET.Models.Entities.Faculty", "Faculty")
+                        .WithMany("Students")
+                        .HasForeignKey("FacultyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Faculty");
+                });
+
+            modelBuilder.Entity("BT_NET.Models.Entities.Faculty", b =>
+                {
+                    b.Navigation("Students");
                 });
 #pragma warning restore 612, 618
         }

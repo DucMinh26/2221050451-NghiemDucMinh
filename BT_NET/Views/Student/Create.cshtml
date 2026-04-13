@@ -1,34 +1,42 @@
-@using Microsoft.EntityFrameworkCore.Metadata.Internal
-@model BT_NET.Models.Student
+@model BT_NET.Models.Entities.Student
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Create";
 }
-<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-<h2>Thêm mới sinh viên</h2>
-<a href="/Student/Index">Danh sách sinh viên</a>
-<form asp-action="Create" asp-controller="Student" method="POST">
-    <div>
-        <label>Mã sinh viên:</label>
-        <input asp-for="StudentCode" class="form-control" />
-        <span asp-validation-for="StudentCode" class="text-danger"></span>
+<h1>Create</h1>
+
+<h4>Student</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="StudentId" class="control-label"></label>
+                <input asp-for="StudentId" class="form-control" />
+                <span asp-validation-for="StudentId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StudentName" class="control-label"></label>
+                <input asp-for="StudentName" class="form-control" />
+                <span asp-validation-for="StudentName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FacultyId" class="control-label"></label>
+                <select asp-for="FacultyId" class ="form-control" asp-items="ViewBag.FacultyId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
-    <div>
-        <label>Họ và tên:</label>
-        <input asp-for="FullName" class="form-control" />
-        <span asp-validation-for="FullName" class="text-danger"></span>
-    </div>
-    <div>
-        <label>Tuổi:</label>
-        <input asp-for="Age" class="form-control" />
-        <span asp-validation-for="Age" class="text-danger"></span>
-    </div>
-    <div>
-        <label>Email:</label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
-    <br />
-    <button type="submit" class="btn btn-primary">Create</button>
-</form>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
