@@ -1,0 +1,39 @@
+@model BT_NET.Models.Entities.Customer
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Lịch sử đơn hàng</h1>
+
+<table class="table table-striped">
+    <thead>
+        <th>Mã đơn hàng</th>
+        <th>Ngày đặt hàng</th>
+        <th>Hành động</th>
+</thead>
+<tbody>
+        @if (Model.Orders != null && Model.Orders.Any())
+        {
+            @foreach (var order in Model.Orders)
+            {
+                <tr>
+                    <td>@order.OrderId</td>
+                    <td>@order.OrderDate.ToString("dd/MM/yyyy")</td>
+                    <td>
+                        @* Nút này để bấm vào xem tiếp trong thùng to đó có những thùng nhỏ (OrderDetail) nào *@
+                        <a asp-controller="Order" asp-action="Details" asp-route-id="@order.OrderId" class="btn btn-info btn-sm">
+                            Xem chi tiết các món đã mua
+                        </a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="3" class="text-center">Khách hàng này chưa mua đơn hàng nào.</td>
+            </tr>
+        }
+    </tbody>
+</table>

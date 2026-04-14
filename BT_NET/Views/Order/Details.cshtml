@@ -1,0 +1,58 @@
+@model BT_NET.Models.Entities.Order
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Order</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.OrderDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Customer.CustomerId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.OrderId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+<h5>Sản phẩm đã mua</h5>
+
+@if (Model.OrderDetails != null && Model.OrderDetails.Any())
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Mã chi tiết</th>
+                <th>Mã sản phẩm</th>
+                <th>Tên sản phẩm</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderDetails)
+            {
+                <tr>
+                    <td>@item.OrderDetailId</td>
+                    <td>@item.ProductId</td>
+                    <td>@(item.ProductName ?? item.Product?.ProductName)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Đơn hàng này chưa có sản phẩm.</p>
+}
