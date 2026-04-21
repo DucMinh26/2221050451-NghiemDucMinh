@@ -9,6 +9,10 @@ using BT_NET.Data;
 using BT_NET.Models.Entities;
 using BT_NET.Models.ViewModels;
 using System.ComponentModel.DataAnnotations;
+using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Wordprocessing;
+using BT_NET.Helpers;
+using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace BT_NET.Controllers
 {
@@ -168,6 +172,43 @@ namespace BT_NET.Controllers
         private bool StudentExists(string id)
         {
             return _context.Students.Any(e => e.StudentId == id);
+        }
+
+        [HttpGet]
+        public IActionResult Upload()
+        {
+            return View();
+        }
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> Upload(IFormFile file)
+        {
+            if(file == null || file.Length ==0)
+                return BadRequest("Nhập file Excel");
+            
+            var helper = new ExcelHelper();
+
+            var studentlist = helper.ReadFromExcel(file, row => new Student
+            {
+                StudentId = row.Cell(1).GetValue<string>().Trim(),
+                StudentName = row.Cell(2).GetValue<string>().Trim(),
+                FacultyId = row.Cell(3).GetValue<string>().Trim()
+
+            });
+
+            foreach(var std in studentlist)
+            {
+                if(!_context.Students.Any(s=>s.StudentId == std.StudentId))
+                {
+                    _context.Students.Add(std);
+                }
+            }
+            
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+
         }
     }
 }
