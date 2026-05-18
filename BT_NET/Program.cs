@@ -20,6 +20,15 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // --- 2. Xây dựng App (Build) ---
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    var context = services.GetRequiredService<ApplicationDbContext>();
+
+    DbInitializer.Initialize(context);
+}
+
 // --- 3. Cấu hình Pipeline (Middleware) ---
 
 if (!app.Environment.IsDevelopment())

@@ -1,0 +1,64 @@
+@model BT_NET.Models.Entities.ImportTicket
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>ImportTicket</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ImportTicketDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ImportTicketDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Supplier)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Supplier.SupplierName)
+        </dd>
+        <dt class="col-sm-2">
+            Tổng số lượng nhập
+        </dt>
+        <dd class="col-sm-10">
+            @Model.ImportDetails.Sum(x => x.Quantity)
+        </dd>
+    </dl>
+</div>
+<div class="mt-4">
+    <h5>Chi tiết phiếu nhập</h5>
+    <p>
+        <a asp-controller="ImportDetail" asp-action="Create" asp-route-importTicketId="@Model.ImportTicketID"
+           class="btn btn-primary">Thêm chi tiết nhập</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Thiết bị</th>
+                <th>Số lượng</th>
+                <th>Đơn giá</th>
+                <th>Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ImportDetails)
+            {
+                <tr>
+                    <td>@item.Device?.DeviceName</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.UnitPrice</td>
+                    <td>@item.TotalPrice</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.ImportTicketID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

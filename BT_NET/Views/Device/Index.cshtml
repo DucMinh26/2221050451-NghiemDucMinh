@@ -1,0 +1,62 @@
+@model IEnumerable<BT_NET.Models.Entities.Device>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<form asp-action="Index" method="get" class="mb-3">
+    <div class="input-group">
+        <input type="text" name="searchString" class="form-control" 
+               placeholder="Nhập tên thiết bị hoặc loại..." value="@ViewData["CurrentFilter"]" />
+        <button type="submit" class="btn btn-outline-secondary">Tìm</button>
+        <a asp-action="Index" class="btn btn-outline-danger">Hủy</a>
+    </div>
+</form>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DeviceName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DevicePrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StockQuantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeviceName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DevicePrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StockQuantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.CategoryID)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.DeviceID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.DeviceID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.DeviceID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

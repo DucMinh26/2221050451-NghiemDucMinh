@@ -1,0 +1,51 @@
+@model BT_NET.Models.Entities.ExportDetail
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>ExportDetail</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ExportDetailID" class="control-label"></label>
+                <input asp-for="ExportDetailID" class="form-control" />
+                <span asp-validation-for="ExportDetailID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExportTicketID" class="control-label"></label>
+                <select asp-for="ExportTicketID" class ="form-control" asp-items="ViewBag.ExportTicketID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeviceID" class="control-label"></label>
+                <select asp-for="DeviceID" class ="form-control" asp-items="ViewBag.DeviceID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Quantity" class="control-label"></label>
+                <input asp-for="Quantity" class="form-control" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UnitPrice" class="control-label"></label>
+                <input asp-for="UnitPrice" class="form-control" />
+                <span asp-validation-for="UnitPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
