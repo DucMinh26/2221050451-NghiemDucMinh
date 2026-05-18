@@ -46,4 +46,4 @@ $(document).on('change','#pageSizeSelect', function(){
     currPageSize = $(this).val();
     currentPage = 1;
     loadSinhVien(currentPage);
-}) 
+})g
