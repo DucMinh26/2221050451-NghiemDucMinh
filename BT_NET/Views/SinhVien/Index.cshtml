@@ -2,12 +2,26 @@
     ViewData["Title"] = "Quản lý Sinh Viên";
 }
 
+
 <div class="container mt-4">
-    <h2 class="mb-4 text-primary">Danh sách Sinh Viên</h2>
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-primary mb-0">Danh sách Sinh Viên</h2>
+        <button class="btn btn-success" id="btnOpenCreateModal">
+            <i class="fas fa-plus"></i> Thêm Sinh Viên
+        </button>
+    </div>
 
     <div id="sinhVienTableContainer">
         <div class="text-center p-5 text-muted">
             Đang tải dữ liệu...
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="sinhVienModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" id="modalContent">
+
         </div>
     </div>
 </div>

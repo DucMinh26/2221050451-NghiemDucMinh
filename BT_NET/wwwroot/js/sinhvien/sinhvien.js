@@ -46,4 +46,96 @@ $(document).on('change','#pageSizeSelect', function(){
     currPageSize = $(this).val();
     currentPage = 1;
     loadSinhVien(currentPage);
-})g
+})
+
+$(document).on('click','#btnOpenCreateModal',function(){
+    $.get('/SinhVien/Create',function(response){
+        $('#modalContent').html(response);
+
+        $('#sinhVienModal').modal('show')
+    })
+
+})
+
+$(document).on('click','#btnSaveCreate',function(){
+    let formData = $('#createSinhVienForm').serialize();
+
+    $.ajax({
+        url:'/SinhVien/Create',
+        type:'POST',
+        data: formData,
+        success: function(response){
+            if(response.success){
+                $('#sinhVienModal').modal('hide');
+                
+                loadSinhVien(currentPage);
+
+                alert(response.message)
+            }else{
+                $('modalContent').html(response);
+            }
+        },
+        error: function(){
+            alert("Co loi xay ra trong qua trinh luu du lieu")
+        }
+    });
+});
+
+$(document).on('click','.btn-edit', function(){
+    let sinhVienId = $(this).data("id");
+    alert("Đã bấm nút sửa, ID của sinh viên là: " + sinhVienId);
+
+    $.get('/SinhVien/Edit',{id : sinhVienId}, function(response){
+        $('#modalContent').html(response);
+        $('#sinhVienModal').modal('show');
+    }).fail(function(){
+        alert("khong the tai thong tin")
+    });
+});
+
+$(document).on('click','#btnSaveEdit', function(){
+    let formData = $('#editSinhVienForm').serialize();
+
+    $.ajax({
+        url:'/SinhVien/Edit',
+        type:'POST',
+        data:formData,
+        success:function(response){
+            if(response.success){
+                $('#sinhVienModal').modal('hide');
+
+                loadSinhVien(currentPage);
+                alert(response.message);
+            }else{
+                $('modalContent').html(response);
+            }
+        },
+        error:function(){
+            alert("co loi xay ra khi cap nhat du lieu");
+        }
+    });
+})
+
+$(document).on('click','.btn-delete',function(){
+    let sinhVienId = $(this).data('id');
+
+    if(confirm("ban co chac chan muon xoa")){
+        $.ajax({
+            url:'/SinhVien/Delete',
+            type:'POST',
+            data:{id:sinhVienId},
+            success: function(response){
+                if(response.success){
+                    loadSinhVien(currentPage);
+
+                    alert(response.message);
+                }else{
+                    alert(response.message);
+                }
+            },
+            error: function(){
+                alert("co loi xay ra");
+            }
+        })
+    }
+})

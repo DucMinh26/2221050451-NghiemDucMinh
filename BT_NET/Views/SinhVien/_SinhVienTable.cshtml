@@ -7,6 +7,7 @@
             <th>Họ Tên</th>
             <th>Lớp</th>
             <th>Điểm TB</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -19,6 +20,10 @@
                     <td>@sv.HoTen</td>
                     <td>@sv.Lop</td>
                     <td>@sv.DiemTB</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary btn-edit" data-id="@sv.Id">Sửa</button>
+                        <button class="btn btn-sm btn-danger btn-delete" data-id="@sv.Id">Xóa</button>
+                    </td>
                 </tr>
             }
         }
